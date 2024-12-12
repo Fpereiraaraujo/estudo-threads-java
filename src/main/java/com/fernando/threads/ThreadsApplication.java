@@ -6,12 +6,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ThreadsApplication {
 
-    public static void main(String[] args) {
-        Thread thread = new Thread(new Runnable() {
+
+    //simulando um deadLock
+    public static Integer count = 0;
+
+    public static void main(String[] args) throws InterruptedException {
+
+        //simulando um deadLock
+        Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("Hello from a thread");
-                throw new RuntimeException("Execuçao de thread");
+                for (int i = 0; i < 100; i++) {
+                    count++;
+                }
             }
         });
 
@@ -19,21 +27,41 @@ public class ThreadsApplication {
             @Override
             public void run() {
                 System.out.println("Hello from a thread2");
-                throw new RuntimeException("Execuçao de thread");
+                for (int i = 0; i < 100; i++) {
+                    count++;
+                }
+
             }
         });
-        thread.start();
 
 
-        //capturando execoes lançadas unchecked exception
-        thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, Throwable e){
-                System.out.println("erro");
-            }
-        });
+        thread1.start();
         thread2.start();
-        System.out.println("hello world");
+
+        thread2.join();
+        thread1.join();
+        System.out.println(count);
+
+
+        //        //criando nova thread
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("Hello from a thread");
+//                throw new RuntimeException("Execuçao de thread");
+//            }
+//        });
+
+//
+
+
+//        //capturando execoes lançadas unchecked exception
+//        thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+//            @Override
+//            public void uncaughtException(Thread t, Throwable e){
+//                System.out.println("erro");
+//            }
+//        });
 
 
     }

@@ -6,3 +6,9 @@ Threads em Java são como "mini-processos" que permitem executar várias tarefas
 
 # Escalonamento de processos 
 ------
+
+
+# Concorrencia de recursos 
+1 - Race Condition: duas ou mais threads tentam acessar e modificar um recurso ao mesmo tempo, resultando em estados imprevisiveis
+
+2 - Deadlock: Duas Threads ficam bloqueadas porque cada uma esta esperando que a outra libere o recurso 
