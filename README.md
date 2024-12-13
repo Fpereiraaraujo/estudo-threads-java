@@ -19,14 +19,17 @@ Threads em Java são como "mini-processos" que permitem executar várias tarefas
         });
 
 # Escalonamento de processos
-------
+ - é a parte do sistema operacional, responsavel por decidir a ordem de execução de cada thread, decidindo qual sera a proxima thread que ira ocupar os recursos da CPU e inclusive decidir quanto tempo ela irá executar
+![img_1.png](img_1.png)
 
 # Concorrencia de recursos
 
 1 - Race Condition: duas ou mais threads tentam acessar e modificar um recurso ao mesmo tempo, resultando em estados
 imprevisiveis
 
-- Exemplo:
+![img.png](img.png)
+
+
 
 2 - Deadlock: Duas Threads ficam bloqueadas porque cada uma esta esperando que a outra libere o recurso
 
@@ -65,9 +68,9 @@ oara variaveis especificas, pois cada thread acessa seu proprio valor
     um bloco ou um metodo pode ser marcado com synchronized para garantir que apenas uma thread acesse a sessção critica
     de cada vez
 
-    `public synchronized void increment(){
-    counter ++
-    }`
+        public synchronized void increment(){
+            counter ++
+        }
 
       - 2 - Classes de bloqueio(Lock)
         o RetrantLock é mais util que o syncronized porque ele pode ser usado para adquirir um bloqueio por um certo
